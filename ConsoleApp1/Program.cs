@@ -270,5 +270,47 @@ class Programm
     }
 }
 
+//Garbage collection in C#
+
+
+
+class MyClasss
+{
+    public string Message { get; set; }
+
+    public MyClasss(string message)
+    {
+        Message = message;
+        Console.WriteLine($"Object created: {Message}");
+    }
+
+    ~MyClasss()
+    {
+        Console.WriteLine($"Object finalized: {Message}");
+    }
+}
+
+class Programs
+{
+    static void Main()
+    {
+        // Creating objects
+        MyClasss obj1 = new MyClasss("Object 1");
+        MyClasss obj2 = new MyClasss("Object 2");
+
+        // Assigning null to obj1 to make it unreachable
+        obj1 = null;
+
+        // Forcing garbage collection (for demonstration purposes, normally, it's not needed)
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+
+        Console.WriteLine("Garbage collection completed.");
+
+        // Note: The output order may vary, as finalization is non-deterministic
+    }
+}
+
+
 
 
